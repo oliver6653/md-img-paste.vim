@@ -1,3 +1,13 @@
+# 新增功能
+如果是hexo blog 地址类型  ，图片放置于md同名文件夹。
+
+开启命令，vimrc下面新增配置
+
+```
+	let g:hexo_mdip = 1 
+```
+
+
 # md-img-paste.vim
 Yet simple tool to paste images into markdown files
 
