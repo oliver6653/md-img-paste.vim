@@ -179,6 +179,31 @@ endfunction
 
 function! mdip#MarkdownClipboardImage()
     " detect os: https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
+    if g:hexo_mdip == 1
+        let g:current_dir = expand('%:t:r')
+	    let g:mdip_imgdir = g:current_dir 
+        let g:mdip_imgdir_intext = g:mdip_imgdir
+    else
+
+        if !exists('g:mdip_imgdir') && !exists('g:mdip_imgdir_absolute')
+            let g:mdip_imgdir = 'img'
+        endif
+        "allow absolute paths. E.g., on linux: /home/path/to/imgdir/
+        if exists('g:mdip_imgdir_absolute')
+            let g:mdip_imgdir = g:mdip_imgdir_absolute
+        endif
+        "allow a different intext reference for relative links
+        if !exists('g:mdip_imgdir_intext')
+            let g:mdip_imgdir_intext = g:mdip_imgdir
+        endif
+        if !exists('g:mdip_tmpname')
+            let g:mdip_tmpname = 'tmp'
+        endif
+        if !exists('g:mdip_imgname')
+            let g:mdip_imgname = 'image'
+        endif
+    endif
+
     let s:os = "Windows"
     if !(has("win64") || has("win32") || has("win16"))
         let s:os = substitute(system('uname'), '\n', '', '')
